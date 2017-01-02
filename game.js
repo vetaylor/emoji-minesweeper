@@ -19,6 +19,6 @@
 	};
 
 	Cell.prototype.setValue = function(value) {
-		var field =
+		
 	};
 }
