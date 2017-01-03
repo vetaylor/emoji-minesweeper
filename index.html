@@ -6,21 +6,32 @@
 
 	<body>
 		<div id="game" class="minesweeper">
-			<div>
-				<h2>
-					<span>Time: </span>
-					<span class="timer">0</span>
-				</h2>
-			</div>
 		
-			<div>
+			<div>	
 				<button class="gameStatus" type="button">😄</button>
+				<span>Time: </span>
+				<span class="timer">0.00</span>
 			</div>
 
-			<div class="board"></div>
+			<div id="board"></div>
+
+			<div>
+				<input id="rows" class="input" type="number" value="9" min="9" max="24" aria-label="Rows">			
+				<input id="columns" class="input" type="number" value="9" min="9" max="24" aria-label="Columns">
+				<input id="numberOfBombs" class="input" type="number" value="10" min="10" max="99" aria-label="Bombs">
+			</div>
+
 		</div>
 
 		<!-- Scripts -->
-		<script src="game.js"></script>
+		<script type="text/javascript" src="game.js"></script>
+
+		<script>
+			var rows = document.getElementById('rows');
+			var columns = document.getElementById('columns');
+			var numberOfBombs = document.getElementById('numberOfBombs');
+
+			game = new Game(rows.value, columns.value, numberOfBombs.value);
+		</script>
 	</body>
 </html>
