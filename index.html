@@ -8,14 +8,16 @@
 
 	<body>
 		<div id="game" class="minesweeper">
-		
-			<div>	
-				<button class="gameStatus" type="button">😄</button>
-				<span>TIME </span>
-				<span class="timer">0.00</span>
+
+			<div>
+				<button id="gameStatus" type="button">😄</button>
 			</div>
 
 			<div id="board"></div>
+
+			<div id="stats">
+				<div class="type"><span>TIME</span></div><div class="type"><span>0.00</span></div>
+			</div>
 
 			<div>
 				<input id="rows" class="input" type="number" value="9" min="9" max="24" aria-label="Rows">			
