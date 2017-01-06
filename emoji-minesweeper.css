@@ -4,8 +4,9 @@ body {
 	text-align: center;
 }
 
-#gameStatus {
-	width: 14.5%;
+#game {
+	position: relative;
+	margin-top: 10px;
 }
 
 .stat {
