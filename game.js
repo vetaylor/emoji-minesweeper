@@ -10,23 +10,36 @@ var Game = function(rows, columns, numberOfBombs) {
 };
 
 Game.prototype.initBoard = function() {
-	var grid = this.bomb_matrix();
+	var grid = [];
+	var coordinates = [];
 
-	for(var i = 0; i < this.rows; i++) {
+	for(var y = 0; y < this.rows; y++) {
 		var row = document.createElement('div');
+		grid[y] = new Array(columns);
 
-		for(var j = 0; j < this.columns; j++) {
+		for(var x = 0; x < this.columns; x++) {
 			var cell = document.createElement('button');
 			row.appendChild(cell);
+
+			grid[y][x] = cell;
+			cell.y = y;
+			cell.x = x;
+
+			coordinates.push(cell);
 		}
 		this.board.appendChild(row);
-	}	
+	}
+	this.generateBombs(grid, coordinates);
 };
 
-Game.prototype.bomb_matrix = function() {
+Game.prototype.generateBombs = function(grid, coordinates) {
+	this.grid = grid;
+	this.coordinates = coordinates;
 
-};
-
-Game.prototype.generateBombs = function() {
-
+	for(var bombsGenerated = 0; bombsGenerated < this.numberOfBombs; bombsGenerated++) {
+		var index = Math.floor(Math.random() * this.coordinates.length);
+		var coord = this.coordinates[index];
+		this.grid[coord.y][coord.x].isBomb = true;
+		this.coordinates.splice(index, 1);
+	}
 };
