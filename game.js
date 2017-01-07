@@ -35,11 +35,25 @@ Game.prototype.initBoard = function() {
 Game.prototype.generateBombs = function(grid, coordinates) {
 	this.grid = grid;
 	this.coordinates = coordinates;
+	var bombCoordinates = [];
 
 	for(var bombsGenerated = 0; bombsGenerated < this.numberOfBombs; bombsGenerated++) {
 		var index = Math.floor(Math.random() * this.coordinates.length);
 		var coord = this.coordinates[index];
 		this.grid[coord.y][coord.x].isBomb = true;
+		bombCoordinates.push(coord);
 		this.coordinates.splice(index, 1);
 	}
+	this.showBombs(bombCoordinates);
 };
+
+Game.prototype.showBombs = function(bombCoordinates) {
+	this.bombCoordinates = bombCoordinates;
+
+	for(var index in this.bombCoordinates) {
+		var y = this.bombCoordinates[index].y;
+		var x = this.bombCoordinates[index].x;
+
+		//this.grid[y][x].innerText = '💣'; 
+	}
+}
