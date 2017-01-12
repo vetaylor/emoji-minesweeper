@@ -18,6 +18,16 @@ button {
 	margin: 5px;
 }
 
+.btn {
+	font-size: 12px;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 25px;
+	background-color: #f2f2f2;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+
 .stat {
 	display: inline-block;
 }

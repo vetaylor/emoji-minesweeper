@@ -19,6 +19,7 @@ Game.prototype.initBoard = function() {
 
 		for(var x = 0; x < this.columns; x++) {
 			var cell = document.createElement('button');
+			cell.className = 'btn';
 			row.appendChild(cell);
 
 			grid[y][x] = cell;
@@ -54,6 +55,11 @@ Game.prototype.showBombs = function(bombCoordinates) {
 		var y = this.bombCoordinates[index].y;
 		var x = this.bombCoordinates[index].x;
 
-		//this.grid[y][x].innerText = '💣'; 
+		this.grid[y][x].innerText = '💣'; 
 	}
+}
+
+Game.prototype.addListeners = function() {
+	var statusButton = document.getElementById('gameStatus');
+	 
 }
