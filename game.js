@@ -19,7 +19,7 @@ Game.prototype.initBoard = function() {
 
 		for(var x = 0; x < this.columns; x++) {
 			var cell = document.createElement('button');
-			cell.className = 'btn';
+			cell.className = 'btn cell';
 			row.appendChild(cell);
 
 			grid[y][x] = cell;
@@ -31,6 +31,7 @@ Game.prototype.initBoard = function() {
 		this.board.appendChild(row);
 	}
 	this.generateBombs(grid, coordinates);
+	this.resetGameData();
 };
 
 Game.prototype.generateBombs = function(grid, coordinates) {
@@ -55,11 +56,15 @@ Game.prototype.showBombs = function(bombCoordinates) {
 		var y = this.bombCoordinates[index].y;
 		var x = this.bombCoordinates[index].x;
 
-		this.grid[y][x].innerText = '💣'; 
+		this.grid[y][x].innerText = '💣';
 	}
 }
 
 Game.prototype.addListeners = function() {
-	var statusButton = document.getElementById('gameStatus');
-	 
+	var cells = document.getElementsByClassName('cell');
+
+}
+
+Game.prototype.resetGameData = function() {
+	document.getElementById('timer').textContent = '0.00'
 }
