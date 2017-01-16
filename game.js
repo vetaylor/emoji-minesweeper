@@ -10,9 +10,7 @@ var Game = function(rows, columns, numberOfBombs) {
 };
 
 Game.prototype.initBoard = function() {
-	var grid = [];
-	var logic = [];
-	var coordinates = [];
+	var grid = [], logic = [], coordinates = [];
 
 	for(var i = 0; i < this.rows; i++) {
 		logic[i] = new Array(columns);
