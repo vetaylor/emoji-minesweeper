@@ -11,7 +11,16 @@ var Game = function(rows, columns, numberOfBombs) {
 
 Game.prototype.initBoard = function() {
 	var grid = [];
+	var logic = [];
 	var coordinates = [];
+
+	for(var i = 0; i < this.rows; i++) {
+		logic[i] = new Array(columns);
+		for(var j = 0; j < this.columns; j++) {
+			logic[i][j] = 0;
+		}
+	}
+	this.logic = logic;
 
 	for(var y = 0; y < this.rows; y++) {
 		var row = document.createElement('div');
@@ -37,26 +46,47 @@ Game.prototype.initBoard = function() {
 Game.prototype.generateBombs = function(grid, coordinates) {
 	this.grid = grid;
 	this.coordinates = coordinates;
-	var bombCoordinates = [];
+	this.bombCoordinates = [];
 
 	for(var bombsGenerated = 0; bombsGenerated < this.numberOfBombs; bombsGenerated++) {
 		var index = Math.floor(Math.random() * this.coordinates.length);
 		var coord = this.coordinates[index];
 		this.grid[coord.y][coord.x].isBomb = true;
-		bombCoordinates.push(coord);
+		this.bombCoordinates.push(coord);
 		this.coordinates.splice(index, 1);
 	}
-	this.showBombs(bombCoordinates);
+	this.showBombs();
+	this.findNeighbors();
 };
 
-Game.prototype.showBombs = function(bombCoordinates) {
-	this.bombCoordinates = bombCoordinates;
+Game.prototype.showBombs = function() {
 
 	for(var index in this.bombCoordinates) {
 		var y = this.bombCoordinates[index].y;
 		var x = this.bombCoordinates[index].x;
 
 		this.grid[y][x].innerText = '💣';
+	}
+}
+
+Game.prototype.findNeighbors = function() {
+
+	for(var index in this.bombCoordinates) {
+		var y = this.bombCoordinates[index].y;
+		var x = this.bombCoordinates[index].x;
+
+		for(var i = y-1; i <= y+1; i++) {
+			for(var j= x-1; j <= x+1; j++) {
+				try{ this.logic[i][j] ++; } catch(e) {}
+			}
+		}
+	}
+
+	for(var index in this.coordinates) {
+		var y = this.coordinates[index].y;
+		var x = this.coordinates[index].x;
+
+		this.grid[y][x].innerText = this.logic[y][x];
 	}
 }
 
