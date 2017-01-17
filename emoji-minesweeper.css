@@ -4,14 +4,16 @@ body {
 }
 
 button {
-	width: 25px;
-	height: 25px;
-	padding: 0px;
+	box-sizing: border-box;
 }
 
 #game {
 	position: relative;
 	margin-top: 10px;
+	padding: 4px 2px;
+	background-color: #ffffff;
+	border: 3px solid #f2f2f2;
+	display: inline-block;
 }
 
 #board {
@@ -24,12 +26,21 @@ button {
 	vertical-align: middle;
 	line-height: 25px;
 	background-color: #f2f2f2;
-	border: 1px solid #ccc;
-	box-sizing: border-box;
+	border: 1px solid #f4f4f4;
 }
 
 .cell {
+	width: 25px;
+	height: 25px;
+	padding: 0px;
 	margin: 1px;
+	display: inline-block;
+}
+
+.new-game {
+	width: 95%;
+	padding: 0;
+	display: inline-block;
 }
 
 .stat {
