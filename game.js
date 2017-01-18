@@ -1,3 +1,8 @@
+/**
+* @fileoverview Emoji Minesweeper implementation
+* @author taylor.victoriae@gmail.com (Victoria Taylor)
+*/
+
 var Game = function(rows, columns, numberOfBombs) {
 	this.rows = Number(rows);
 	this.columns = Number(columns);
@@ -10,6 +15,9 @@ var Game = function(rows, columns, numberOfBombs) {
 };
 
 Game.prototype.initBoard = function() {
+	// 🏁 grid stores buttons representing cells
+	// 🔮 logic stores how many bombs are in proximity to each cell
+	// 🚀 coordinates stores "x and y coordinate" of every cell
 	var grid = [], logic = [], coordinates = [];
 
 	for(var i = 0; i < this.rows; i++) {
@@ -54,7 +62,7 @@ Game.prototype.generateBombs = function(grid, coordinates) {
 		this.coordinates.splice(index, 1);
 	}
 	this.showBombs();
-	this.findNeighbors();
+	this.fillLogic();
 };
 
 Game.prototype.showBombs = function() {
@@ -67,7 +75,7 @@ Game.prototype.showBombs = function() {
 	}
 }
 
-Game.prototype.findNeighbors = function() {
+Game.prototype.fillLogic = function() {
 
 	for(var index in this.bombCoordinates) {
 		var y = this.bombCoordinates[index].y;
