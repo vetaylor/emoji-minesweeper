@@ -61,17 +61,29 @@ Game.prototype.generateBombs = function(grid, coordinates) {
 		this.bombCoordinates.push(coord);
 		this.coordinates.splice(index, 1);
 	}
-	this.showBombs();
 	this.fillLogic();
+	this.showLogic();
 };
 
-Game.prototype.showBombs = function() {
+Game.prototype.showLogic = function() {
 
 	for(var index in this.bombCoordinates) {
 		var y = this.bombCoordinates[index].y;
 		var x = this.bombCoordinates[index].x;
 
 		this.grid[y][x].innerText = '💣';
+	}
+
+	for(var index in this.coordinates) {
+		var y = this.coordinates[index].y;
+		var x = this.coordinates[index].x;
+
+		if(this.logic[y][x] == 0) {
+			this.grid[y][x].innerText = '🍑';
+		}
+		else {
+			this.grid[y][x].innerText = this.logic[y][x];
+		}
 	}
 }
 
@@ -86,13 +98,6 @@ Game.prototype.fillLogic = function() {
 				try{ this.logic[i][j] ++; } catch(e) {}
 			}
 		}
-	}
-
-	for(var index in this.coordinates) {
-		var y = this.coordinates[index].y;
-		var x = this.coordinates[index].x;
-
-		this.grid[y][x].innerText = this.logic[y][x];
 	}
 }
 
