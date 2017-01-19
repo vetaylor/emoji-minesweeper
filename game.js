@@ -95,7 +95,7 @@ Game.prototype.fillLogic = function() {
 
 		for(var i = y-1; i <= y+1; i++) {
 			for(var j= x-1; j <= x+1; j++) {
-				try{ this.logic[i][j] ++; } catch(e) {}
+				try{ this.logic[i][j] ++; } catch(err) {}
 			}
 		}
 	}
@@ -104,6 +104,11 @@ Game.prototype.fillLogic = function() {
 Game.prototype.addListeners = function() {
 	var cells = document.getElementsByClassName('cell');
 
+	for(var cell in cells){
+		cell.addEventListener('click', function(e) {
+
+		});
+	}
 }
 
 Game.prototype.resetGameData = function() {
