@@ -16,17 +16,8 @@ var Game = function(rows, columns, numberOfBombs) {
 
 Game.prototype.initBoard = function() {
 	// 🏁 grid stores buttons representing cells
-	// 🔮 logic stores how many bombs are in proximity to each cell
 	// 🚀 coordinates stores "x and y coordinate" of every cell
-	var grid = [], logic = [], coordinates = [];
-
-	for(var i = 0; i < this.rows; i++) {
-		logic[i] = new Array(columns);
-		for(var j = 0; j < this.columns; j++) {
-			logic[i][j] = 0;
-		}
-	}
-	this.logic = logic;
+	var grid = [], coordinates = [];
 
 	for(var y = 0; y < this.rows; y++) {
 		var row = document.createElement('div');
@@ -40,6 +31,7 @@ Game.prototype.initBoard = function() {
 			grid[y][x] = cell;
 			cell.y = y;
 			cell.x = x;
+			cell.neighboringBombs = 0;
 
 			coordinates.push(cell);
 		}
@@ -78,11 +70,11 @@ Game.prototype.showLogic = function() {
 		var y = this.coordinates[index].y;
 		var x = this.coordinates[index].x;
 
-		if(this.logic[y][x] == 0) {
+		if(this.grid[y][x].neighboringBombs == 0) {
 			this.grid[y][x].innerText = '✨';
 		}
 		else {
-			this.grid[y][x].innerText = this.logic[y][x];
+			this.grid[y][x].innerText = this.grid[y][x].neighboringBombs;
 		}
 	}
 }
@@ -95,7 +87,7 @@ Game.prototype.fillLogic = function() {
 
 		for(var i = y-1; i <= y+1; i++) {
 			for(var j= x-1; j <= x+1; j++) {
-				try{ this.logic[i][j] ++; } catch(err) {}
+				try{ this.grid[i][j].neighboringBombs++; } catch(err) {}
 			}
 		}
 	}
