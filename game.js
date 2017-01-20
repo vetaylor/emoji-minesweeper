@@ -79,7 +79,7 @@ Game.prototype.showLogic = function() {
 		var x = this.coordinates[index].x;
 
 		if(this.logic[y][x] == 0) {
-			this.grid[y][x].innerText = '🍑';
+			this.grid[y][x].innerText = '✨';
 		}
 		else {
 			this.grid[y][x].innerText = this.logic[y][x];
