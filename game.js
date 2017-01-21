@@ -10,6 +10,9 @@ var Game = function(rows, columns, numberOfBombs) {
 	this.board = document.getElementById('board');
 	this.bombCount = document.getElementById('bomb-count');
 
+	var numbers = ['1⃣', '2⃣', '3⃣', '4⃣', '5⃣', '6⃣', '7⃣', '8⃣'];
+	this.emojis = [0].concat(numbers);
+
 	this.bombCount.innerText = this.numberOfBombs;
 	this.initBoard();
 };
@@ -70,11 +73,12 @@ Game.prototype.showLogic = function() {
 		var y = this.coordinates[index].y;
 		var x = this.coordinates[index].x;
 
-		if(this.grid[y][x].neighboringBombs == 0) {
+		var n = this.grid[y][x].neighboringBombs;
+		if(n == 0) {
 			this.grid[y][x].innerText = '✨';
 		}
 		else {
-			this.grid[y][x].innerText = this.grid[y][x].neighboringBombs;
+			this.grid[y][x].innerText = this.emojis[n];
 		}
 	}
 }
