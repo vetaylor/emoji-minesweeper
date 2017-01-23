@@ -49,7 +49,8 @@ Game.prototype.generateBombs = function(grid, coordinates) {
 	this.coordinates = coordinates;
 	this.bombCoordinates = [];
 
-	for(var bombsGenerated = 0; bombsGenerated < this.numberOfBombs; bombsGenerated++) {
+	for(var bombsGenerated = 0; bombsGenerated < this.numberOfBombs;
+			bombsGenerated++) {
 		var index = Math.floor(Math.random() * this.coordinates.length);
 		var coord = this.coordinates[index];
 		this.grid[coord.y][coord.x].isBomb = true;
