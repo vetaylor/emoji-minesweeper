@@ -11,7 +11,7 @@ var Game = function(rows, columns, numberOfBombs) {
 	this.bombCount = document.getElementById('bomb-count');
 
 	var numbers = ['1⃣', '2⃣', '3⃣', '4⃣', '5⃣', '6⃣', '7⃣', '8⃣'];
-	this.emojis = [0].concat(numbers);
+	this.emojis = ['✨'].concat(numbers);
 
 	this.bombCount.innerText = this.numberOfBombs;
 	this.initBoard();
@@ -34,6 +34,7 @@ Game.prototype.initBoard = function() {
 			grid[y][x] = cell;
 			cell.y = y;
 			cell.x = x;
+			cell.isBomb = false;
 			cell.neighboringBombs = 0;
 
 			coordinates.push(cell);
@@ -63,23 +64,15 @@ Game.prototype.generateBombs = function(grid, coordinates) {
 
 Game.prototype.showLogic = function() {
 
-	for(var index in this.bombCoordinates) {
-		var y = this.bombCoordinates[index].y;
-		var x = this.bombCoordinates[index].x;
-
-		this.grid[y][x].innerText = '💣';
-	}
-
-	for(var index in this.coordinates) {
-		var y = this.coordinates[index].y;
-		var x = this.coordinates[index].x;
-
-		var n = this.grid[y][x].neighboringBombs;
-		if(n == 0) {
-			this.grid[y][x].innerText = '✨';
-		}
-		else {
-			this.grid[y][x].innerText = this.emojis[n];
+	for(var y = 0; y < this.rows; y++) {
+		for(var x = 0; x < this.rows; x++) {
+			var c = this.grid[y][x];
+			if(c.isBomb) {
+				c.innerText = '💣';
+			}
+			else {
+				c.innerText = this.emojis[c.neighboringBombs];
+			}
 		}
 	}
 }
