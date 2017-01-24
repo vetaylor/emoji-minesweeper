@@ -3,7 +3,7 @@
 * @author taylor.victoriae@gmail.com (Victoria Taylor)
 */
 
-var Game = function(rows, columns, numberOfBombs) {
+var Game = function (rows, columns, numberOfBombs) {
 	this.rows = Number(rows);
 	this.columns = Number(columns);
 	this.numberOfBombs = Number(numberOfBombs);
@@ -17,7 +17,7 @@ var Game = function(rows, columns, numberOfBombs) {
 	this.initBoard();
 };
 
-Game.prototype.initBoard = function() {
+Game.prototype.initBoard = function () {
 	// 🏁 grid stores buttons representing cells
 	// 🚀 coordinates stores "x and y coordinate" of every cell
 	var grid = [], coordinates = [];
@@ -28,7 +28,7 @@ Game.prototype.initBoard = function() {
 
 		for(var x = 0; x < this.columns; x++) {
 			var cell = document.createElement('button');
-			cell.className = 'btn cell';
+			cell.className = 'btn mine-cell';
 			row.appendChild(cell);
 
 			grid[y][x] = cell;
@@ -43,9 +43,10 @@ Game.prototype.initBoard = function() {
 	}
 	this.generateBombs(grid, coordinates);
 	this.resetGameData();
+	this.addListeners();
 };
 
-Game.prototype.generateBombs = function(grid, coordinates) {
+Game.prototype.generateBombs = function (grid, coordinates) {
 	this.grid = grid;
 	this.coordinates = coordinates;
 	this.bombCoordinates = [];
@@ -62,7 +63,7 @@ Game.prototype.generateBombs = function(grid, coordinates) {
 	this.showLogic();
 };
 
-Game.prototype.showLogic = function() {
+Game.prototype.showLogic = function () {
 
 	for(var y = 0; y < this.rows; y++) {
 		for(var x = 0; x < this.rows; x++) {
@@ -77,7 +78,7 @@ Game.prototype.showLogic = function() {
 	}
 }
 
-Game.prototype.fillLogic = function() {
+Game.prototype.fillLogic = function () {
 
 	for(var index in this.bombCoordinates) {
 		var y = this.bombCoordinates[index].y;
@@ -91,16 +92,17 @@ Game.prototype.fillLogic = function() {
 	}
 }
 
-Game.prototype.addListeners = function() {
-	var cells = document.getElementsByClassName('cell');
-
-	for(var cell in cells){
-		cell.addEventListener('click', function(e) {
-
+Game.prototype.addListeners = function () {
+	var cells = document.getElementsByClassName('mine-cell');
+	//🤔 Not sure how to do this without using Array.prototype.forEach
+	Array.prototype.forEach.call(cells, function(target) {
+		target.addEventListener('click', function(e) {
+			//console.log(target.y + "," + target.x);
+			target.innerText = '🐝';
 		});
-	}
+	});
 }
 
-Game.prototype.resetGameData = function() {
+Game.prototype.resetGameData = function () {
 	document.getElementById('timer').textContent = '0.00'
 }
