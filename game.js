@@ -69,10 +69,10 @@ Game.prototype.showLogic = function () {
 		for(var x = 0; x < this.rows; x++) {
 			var c = this.grid[y][x];
 			if(c.isBomb) {
-				c.innerText = '💣';
+				c.innerHTML = '💣';
 			}
 			else {
-				c.innerText = this.emojis[c.neighboringBombs];
+				c.innerHTML = this.emojis[c.neighboringBombs];
 			}
 		}
 	}
@@ -99,7 +99,7 @@ Game.prototype.addListeners = function () {
 	Array.prototype.forEach.call(cells, function(target) {
 		target.addEventListener('click', function(e) {
 			target.classList.add('revealed');
-			target.innerText = '🐝';
+			target.innerHTML = '🐝';
 		});
 	});
 }

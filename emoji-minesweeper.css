@@ -5,6 +5,7 @@ body {
 
 button {
 	box-sizing: border-box;
+	outline: none;
 }
 
 #game {
@@ -38,8 +39,8 @@ button {
 }
 
 .revealed {
-	background-color: #ffffff;
-	border: 2px solid #ffffff;
+	background-color: transparent;
+	border: 0px solid;
 }
 
 .new-game {
