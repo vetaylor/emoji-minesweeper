@@ -60,23 +60,7 @@ Game.prototype.generateBombs = function (grid, coordinates) {
 		this.coordinates.splice(index, 1);
 	}
 	this.fillLogic();
-	this.showLogic();
 };
-
-Game.prototype.showLogic = function () {
-
-	for(var y = 0; y < this.rows; y++) {
-		for(var x = 0; x < this.rows; x++) {
-			var c = this.grid[y][x];
-			if(c.isBomb) {
-				c.innerHTML = '💣';
-			}
-			else {
-				c.innerHTML = this.emojis[c.neighboringBombs];
-			}
-		}
-	}
-}
 
 Game.prototype.fillLogic = function () {
 
@@ -99,7 +83,11 @@ Game.prototype.addListeners = function () {
 	Array.prototype.forEach.call(cells, function(target) {
 		target.addEventListener('click', function(e) {
 			target.classList.add('revealed');
-			target.innerHTML = '🐝';
+			if(target.isBomb) {
+				target.innerHTML = '💣';
+			} else {
+				target.innerHTML = that.emojis[target.neighboringBombs];
+			}
 		});
 	});
 }
