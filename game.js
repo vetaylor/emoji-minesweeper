@@ -78,6 +78,12 @@ Game.prototype.fillLogic = function () {
 
 Game.prototype.addListeners = function () {
 	var that = this;
+
+	var gameStatus = document.getElementById('gameStatus');
+	gameStatus.addEventListener('click', function(e) {
+		gameStatus.innerHTML = '😎';
+	});
+
 	var cells = document.getElementsByClassName('mine-cell');
 	//🤔 Not sure how to do this without using Array.prototype.forEach
 	Array.prototype.forEach.call(cells, function(target) {
